@@ -12,11 +12,11 @@ package praktikum_9.view;
 public class Oberflaeche extends javax.swing.JFrame
 {
   /**
-   * @return the jLayeredPane1
+   * @return the jPane
    */
-  public javax.swing.JLayeredPane getjLayeredPane1()
+  public javax.swing.JPanel getjPane()
   {
-    return jLayeredPane1;
+    return jPane;
   }
   /**
    * @return the pmMniDrucken
@@ -157,7 +157,7 @@ public class Oberflaeche extends javax.swing.JFrame
     btnOeffnen = new javax.swing.JButton();
     btnSpeichern = new javax.swing.JButton();
     btnDrucken = new javax.swing.JButton();
-    jLayeredPane1 = new javax.swing.JLayeredPane();
+    jPane = new javax.swing.JPanel();
     jMenuBar1 = new javax.swing.JMenuBar();
     mniDatei = new javax.swing.JMenu();
     mnuMniOeffnen = new javax.swing.JMenuItem();
@@ -209,8 +209,8 @@ public class Oberflaeche extends javax.swing.JFrame
 
     getContentPane().add(toolBar, java.awt.BorderLayout.PAGE_START);
 
-    jLayeredPane1.setLayout(new java.awt.BorderLayout());
-    getContentPane().add(jLayeredPane1, java.awt.BorderLayout.CENTER);
+    jPane.setLayout(new java.awt.BorderLayout());
+    getContentPane().add(jPane, java.awt.BorderLayout.CENTER);
 
     mniDatei.setLabel("Datei");
 
@@ -295,8 +295,8 @@ public class Oberflaeche extends javax.swing.JFrame
   private javax.swing.JColorChooser ccColor;
   private javax.swing.JFileChooser fcOeffnen;
   private javax.swing.JFileChooser fcSave;
-  private javax.swing.JLayeredPane jLayeredPane1;
   private javax.swing.JMenuBar jMenuBar1;
+  private javax.swing.JPanel jPane;
   private javax.swing.JPopupMenu jPopupMenu1;
   private javax.swing.JMenu mniDatei;
   private javax.swing.JMenu mniStart;

@@ -11,16 +11,19 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.RenderingHints;
+import java.awt.geom.Line2D;
 import java.awt.geom.Rectangle2D;
 import java.awt.print.PageFormat;
 import java.awt.print.Printable;
 import java.awt.print.PrinterException;
 import java.awt.print.PrinterJob;
+import java.util.logging.Logger;
 import javax.print.attribute.HashPrintRequestAttributeSet;
 import javax.print.attribute.standard.DialogTypeSelection;
 import javax.swing.JComponent;
 import javax.swing.JOptionPane;
 import praktikum_9.model.Figuren;
+import praktikum_9.model.GraphikModel;
 
 /**
  *
@@ -29,13 +32,17 @@ import praktikum_9.model.Figuren;
 public class GraphikView extends JComponent implements Printable
 {
   private final Rectangle2D.Float pixel;
+  private final Line2D.Float line;
   private final static Dimension EINS = new Dimension(1, 1);
   private Figuren model;
-  private Point before = new Point();
+  private Point before = new Point(0, 0);
+  private static final Logger lg = Logger.getLogger("ohm");
+  private Point start;
   
   public GraphikView()
   {
     pixel = new Rectangle2D.Float();
+    line = new Line2D.Float();
   }
   
   @Override
@@ -44,27 +51,26 @@ public class GraphikView extends JComponent implements Printable
     super.paintComponent(g);
     Graphics2D g2 = (Graphics2D) g;
     g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-    model.getFiguren().forEach((m) ->
+    for(GraphikModel m: model.getFiguren())
     {
-      m.getPunkte().stream().map((f) ->
+      for(Point f: m.getPunkte())
       {
         pixel.setFrame(f, EINS);
-        return f;
-      }).forEachOrdered((f) ->
-      {
         g2.draw(pixel);
-        before = f;
-      });
-    });
+      }
+    }
   }
   
   public void drawPoint(Point p)
   {
     // Graphic holen
     Graphics2D g2  = (Graphics2D)this.getGraphics();
-    
     pixel.setFrame(p, EINS);
     g2.draw(pixel);
+    line.setLine(before, p);
+    lg.info("zeichne Linie");
+    g2.draw(line);
+    before = p;
     
     // Graphic freigeben
     g2.dispose();

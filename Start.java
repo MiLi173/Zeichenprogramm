@@ -6,6 +6,7 @@
 
 package praktikum_9;
 
+import java.awt.BorderLayout;
 import javax.swing.WindowConstants;
 import praktikum_9.controller.DruckenController;
 import praktikum_9.controller.GraphikController;
@@ -29,8 +30,8 @@ public class Start
     Figuren model = new Figuren();
     GraphikView view = new GraphikView(); 
     view.setModel(model);
-    frm.getjLayeredPane1().setLayer(view, 0);
-    
+    frm.getjPane().setLayout(new BorderLayout());
+    frm.getjPane().add(view, BorderLayout.CENTER);
     
     OeffnenController openCtrl = new OeffnenController(frm, model);
     SpeichernController saveCtrl = new SpeichernController(frm, model);
